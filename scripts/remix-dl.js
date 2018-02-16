@@ -1,3 +1,5 @@
+// remix-dl script downloads remix distribution to be packaged in
+// the electron app.
 const os = require('os')
 const request = require('request')
 const fs = require('fs')

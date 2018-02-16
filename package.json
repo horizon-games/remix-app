@@ -18,14 +18,10 @@
       "buildResources": "resources"
     },
     "mac": {
-      "target": [
-        "dmg"
-      ]
+      "target": ["dmg"]
     },
     "linux": {
-      "target": [
-        "tar.gz"
-      ]
+      "target": ["tar.gz"]
     }
   },
   "scripts": {
