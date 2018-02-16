@@ -1,6 +1,6 @@
 {
   "name": "remix",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "remixFile": "https://github.com/ethereum/browser-solidity/raw/gh-pages/remix-7be40bf.zip",
   "description": "Remix Solidity IDE https://remix.ethereum.org - Electron Edition",
   "author": "Peter Kieltyka <pk@horizongames.co>",

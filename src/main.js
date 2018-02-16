@@ -5,7 +5,7 @@
 
 import path from "path"
 import url from "url"
-import { app, Menu } from "electron"
+import { app, session, Menu } from "electron"
 import createWindow from "./helpers/window"
 import { buildMenu } from "./helpers/menu"
 
@@ -30,6 +30,28 @@ app.on("ready", () => {
 
   Menu.setApplicationMenu(Menu.buildFromTemplate(buildMenu(mainWindow)))
 
+
+  // Increase cache times to 1 year for solc bin compilers.
+  const filter = {
+    urls: ["https://ethereum.github.io/solc-bin/bin/soljson-*"]
+  }
+
+  session.defaultSession.webRequest.onHeadersReceived(filter, (details, callback) => {
+    const respHeaders = details.responseHeaders
+
+    let nRespHeaders = {
+      ...respHeaders,
+      'cache-control': ['max-age=31540000']
+    }
+    delete nRespHeaders.expires
+
+    callback({
+      cancel: false,
+      responseHeaders: nRespHeaders
+    })
+  })
+
+  // Load the local statuc app
   mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, "app/index.html"),
