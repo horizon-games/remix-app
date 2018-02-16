@@ -1,16 +1,18 @@
 # <img align="left" alt="remix" src="https://raw.githubusercontent.com/horizon-games/remix-app/master/resources/icon.png" width="64" /> remix-app
 
+<br/>
+
 This project packages Remix, the excellent Ethereum Solidity IDE, into
 a dedicated desktop application that runs from your local machine. NOTE:
 the editor downloads the solidity compiler each time it boots, this is
 as per the design of the Remix runtime, but with a bit more work those
 files could be cached.
 
-<img alt="screenshot" src="https://raw.githubusercontent.com/horizon-games/remix-app/master/resources/screenshot.png" width="512" />
+<img align="center" alt="screenshot" src="https://raw.githubusercontent.com/horizon-games/remix-app/master/resources/screenshot.png" width="1024" />
 
 ## Install or Build your own
 
-**To install a pre-built image, go here:** ..
+**To install a pre-built image, see:** https://github.com/horizon-games/remix-app/releases
 
 **To build your own:**
 1. Clone this repo
