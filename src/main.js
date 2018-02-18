@@ -1,66 +1,42 @@
-// This is main process of Electron, started as first thing when your
-// app starts. It runs through entire life of your application.
-// It doesn't have any windows which you can see on screen, but we can open
-// window from here.
+import path from 'path'
+import url from 'url'
+import { app, Menu } from 'electron'
+import createWindow from './helpers/window'
+import { buildMenu } from './helpers/menu'
+import { registerAppCache } from './helpers/app_cache'
 
-import path from "path"
-import url from "url"
-import { app, session, Menu } from "electron"
-import createWindow from "./helpers/window"
-import { buildMenu } from "./helpers/menu"
-
-// Save userData in separate folders for each environment.
-// Thanks to this you can use production and development versions of the app
-// on same machine like those are two separate apps.
-if (NODE_ENV !== "production") {
-  const userDataPath = app.getPath("userData")
-  app.setPath("userData", `${userDataPath} (${NODE_ENV})`)
+let userDataPath = app.getPath('userData')
+if (NODE_ENV !== 'production') {
+  userDataPath = `${userDataPath} (${NODE_ENV})`
+  app.setPath('userData', userDataPath)
 }
 
 app.setAboutPanelOptions({
-  applicationName: "remix, Electron Edition",
-  credits: "Horizon Blockchain Games \n https://horizongames.co",
-  copyright: "Remix by https://github.com/ethereum/remix"
+  applicationName: 'remix-app',
+  credits: 'Horizon Blockchain Games \n https://horizongames.co',
+  copyright: 'Remix by https://github.com/ethereum/remix'
 })
 
-app.on("ready", () => {
-  const mainWindow = createWindow("main", {
+app.on('ready', () => {
+  const mainWindow = createWindow('main', {
     width: 1024
   })
 
   Menu.setApplicationMenu(Menu.buildFromTemplate(buildMenu(mainWindow)))
 
+  // Register app cache on the main window's network stack
+  registerAppCache(mainWindow, userDataPath)
 
-  // Increase cache times to 1 year for solc bin compilers.
-  const filter = {
-    urls: ["https://ethereum.github.io/solc-bin/bin/soljson-*"]
-  }
-
-  session.defaultSession.webRequest.onHeadersReceived(filter, (details, callback) => {
-    const respHeaders = details.responseHeaders
-
-    let nRespHeaders = {
-      ...respHeaders,
-      'cache-control': ['max-age=31540000']
-    }
-    delete nRespHeaders.expires
-
-    callback({
-      cancel: false,
-      responseHeaders: nRespHeaders
-    })
-  })
-
-  // Load the local statuc app
+  // Load the local static app
   mainWindow.loadURL(
     url.format({
-      pathname: path.join(__dirname, "app/index.html"),
-      protocol: "file:",
+      pathname: path.join(__dirname, 'app/index.html'),
+      protocol: 'file:',
       slashes: true
     })
   )
 })
 
-app.on("window-all-closed", () => {
+app.on('window-all-closed', () => {
   app.quit()
 })

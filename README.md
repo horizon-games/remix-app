@@ -3,7 +3,8 @@
 <br/>
 
 This project packages Remix, the excellent Ethereum Solidity IDE, into
-a dedicated desktop application that runs from your local machine.
+a dedicated desktop application that runs from your local machine. Remix-app
+also caches solc compiler downloads so Remix is fully usable in airplane mode.
 
 <img align="center" alt="screenshot" src="https://raw.githubusercontent.com/horizon-games/remix-app/master/resources/screenshot.png" width="1024" />
 

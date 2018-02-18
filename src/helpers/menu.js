@@ -1,28 +1,28 @@
-import { app, shell, BrowserWindow, BrowserView } from "electron"
+import { app, shell, BrowserWindow, BrowserView } from 'electron'
 
-const pkgJson = require("../../package.json")
+const pkgJson = require('../../package.json')
 
 function buildMenu(mainWindow) {
   let menu = [
     {
-      label: "Edit",
+      label: 'Edit',
       submenu: [
-        { role: "undo" },
-        { role: "redo" },
-        { type: "separator" },
-        { role: "cut" },
-        { role: "copy" },
-        { role: "paste" },
-        { role: "selectall" }
+        { role: 'undo' },
+        { role: 'redo' },
+        { type: 'separator' },
+        { role: 'cut' },
+        { role: 'copy' },
+        { role: 'paste' },
+        { role: 'selectall' }
       ]
     },
     {
-      role: "window",
+      role: 'window',
       submenu: [
-        { role: "minimize" },
+        { role: 'minimize' },
         {
-          label: "Close",
-          accelerator: "Cmd+W",
+          label: 'Close',
+          accelerator: 'Cmd+W',
           click: () => {
             const win = BrowserWindow.getFocusedWindow()
             if (win === null) {
@@ -30,7 +30,7 @@ function buildMenu(mainWindow) {
                 mainWindow.closeDevTools()
               }
             } else {
-              if (process.platform === "darwin") {
+              if (process.platform === 'darwin') {
                 app.hide()
               } else {
                 win.close()
@@ -41,11 +41,11 @@ function buildMenu(mainWindow) {
       ]
     },
     {
-      label: "Inspector",
+      label: 'Inspector',
       submenu: [
         {
-          label: "Toggle DevTools",
-          accelerator: "Alt+CmdOrCtrl+I",
+          label: 'Toggle DevTools',
+          accelerator: 'Alt+CmdOrCtrl+I',
           click: () => {
             BrowserWindow.getFocusedWindow().toggleDevTools();
           }
@@ -53,10 +53,10 @@ function buildMenu(mainWindow) {
       ]
     },
     {
-      role: "help",
+      role: 'help',
       submenu: [
         {
-          label: "Learn More",
+          label: 'Learn More',
           click: () => {
             shell.openExternal(pkgJson.homepage)
           }
@@ -65,19 +65,19 @@ function buildMenu(mainWindow) {
     }
   ]
 
-  if (process.platform === "darwin") {
+  if (process.platform === 'darwin') {
     menu.unshift({
       label: app.getName(),
       submenu: [
-        { role: "about" },
-        { type: "separator" },
-        { role: "services", submenu: [] },
-        { type: "separator" },
-        { role: "hide" },
-        { role: "hideothers" },
-        { role: "unhide" },
-        { type: "separator" },
-        { role: "quit" }
+        { role: 'about' },
+        { type: 'separator' },
+        { role: 'services', submenu: [] },
+        { type: 'separator' },
+        { role: 'hide' },
+        { role: 'hideothers' },
+        { role: 'unhide' },
+        { type: 'separator' },
+        { role: 'quit' }
       ]
     })
   }
