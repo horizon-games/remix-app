@@ -11,11 +11,13 @@ if (NODE_ENV !== 'production') {
   app.setPath('userData', userDataPath)
 }
 
-app.setAboutPanelOptions({
-  applicationName: 'remix-app',
-  credits: 'Horizon Blockchain Games \n https://horizongames.co',
-  copyright: 'Remix by https://github.com/ethereum/remix'
-})
+if (process.platform === 'darwin') {
+  app.setAboutPanelOptions({
+    applicationName: 'remix-app',
+    credits: 'Horizon Blockchain Games \n https://horizongames.co',
+    copyright: 'Remix by https://github.com/ethereum/remix'
+  })
+}
 
 app.on('ready', () => {
   const mainWindow = createWindow('main', {
