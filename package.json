@@ -1,7 +1,6 @@
 {
   "name": "remix",
-  "version": "0.1.1",
-  "remixFile": "https://github.com/ethereum/browser-solidity/raw/gh-pages/remix-7be40bf.zip",
+  "version": "0.1.2",
   "description": "Remix Solidity IDE https://remix.ethereum.org - Electron Edition",
   "author": "Peter Kieltyka <pk@horizongames.co>",
   "credits": "Horizon Blockchain Games https://horizongames.co",
@@ -48,7 +47,7 @@
     "babel-loader": "8.0.0-beta.0",
     "babel-plugin-transform-object-rest-spread": "7.0.0-beta.3",
     "electron": "1.8.2",
-    "electron-builder": "20.0.5",
+    "electron-builder": "20.0.8",
     "request": "^2.83.0",
     "rimraf": "^2.6.2",
     "source-map-support": "^0.5.3",
