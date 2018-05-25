@@ -8,7 +8,7 @@ const unzipper = require('unzipper')
 const rimraf = require('rimraf')
 
 const fetchLatestRemixDownloadURL = (cb) => {
-  const repoListURL = 'https://api.github.com/repos/ethereum/browser-solidity/contents/?ref=gh-pages'
+  const repoListURL = 'https://api.github.com/repos/ethereum/remix-ide/contents/?ref=gh-pages'
   const githubReq = {
     url: repoListURL,
     headers: {
@@ -29,13 +29,13 @@ const fetchLatestRemixDownloadURL = (cb) => {
 
     const repo = JSON.parse(body)
     let downloadURL
-    
+
     repo.forEach((obj) => {
       if (obj.name.match(/remix-[a-z0-9]+\.zip/i)) {
         downloadURL = obj.download_url
       }
     })
-    
+
     if (downloadURL) {
       cb(downloadURL)
     } else {
@@ -48,14 +48,14 @@ const fetchLatestRemixDownloadURL = (cb) => {
 const fetchRemixApp = (url, destPath) => {
   const ret = () => {
     const appDir = path.join(path.dirname(fs.realpathSync(__filename)), '../build/app')
-  
+
     rimraf(appDir, () => {
       const reader = fs.createReadStream(destPath)
       reader.pipe(unzipper.Extract({ path: appDir }))
       fs.unlinkSync(destPath)
-    }) 
+    })
   }
-  
+
   const err = (msg) => {
     console.error(msg)
   }
