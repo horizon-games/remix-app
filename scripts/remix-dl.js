@@ -8,7 +8,7 @@ const unzipper = require('unzipper')
 const rimraf = require('rimraf')
 
 const fetchLatestRemixDownloadURL = (cb) => {
-  const repoListURL = 'https://api.github.com/repos/ethereum/browser-solidity/contents/?ref=gh-pages'
+  const repoListURL = 'https://api.github.com/repos/ethereum/remix-live/contents/?ref=gh-pages'
   const githubReq = {
     url: repoListURL,
     headers: {

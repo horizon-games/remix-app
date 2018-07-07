@@ -37,6 +37,12 @@ app.on('ready', () => {
       slashes: true
     })
   )
+
+  // Work-around for electron/chrome 51+ onbeforeunload behavior
+  // which prevents the app window to close if not invlidated.
+  mainWindow.webContents.once('dom-ready', () => {
+    mainWindow.webContents.executeJavaScript("window.onbeforeunload = null")
+  })
 })
 
 app.on('window-all-closed', () => {
