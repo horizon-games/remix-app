@@ -11,7 +11,7 @@ const registerAppCache = (browserWindow, userDataPath) => {
   // fetch the latest list of available compilers, but fallback
   // to a local version if available.
   let getList = false
-  const listURL = 'https://ethereum.github.io/solc-bin/bin/list.json'
+  const listURL = 'https://solc-bin.ethereum.org/bin/list.json'
   const resp = fetch(listURL)
   resp.then((resp) => {
     if (resp.status === 200) {
@@ -22,7 +22,7 @@ const registerAppCache = (browserWindow, userDataPath) => {
   })
 
   const filter = {
-    urls: ['https://ethereum.github.io/solc-bin/bin/*']
+    urls: ['https://solc-bin.ethereum.org/bin/*']
   }
 
   const session = browserWindow.webContents.session
@@ -53,7 +53,7 @@ const registerAppCache = (browserWindow, userDataPath) => {
     const resourceURL = details.url
 
     const resp = fetch(resourceURL)
-    
+
     resp.then((resp) => {
       if (resp.status === 200) {
         const filename = getFilename(resourceURL)

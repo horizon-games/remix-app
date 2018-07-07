@@ -14,7 +14,7 @@ if (NODE_ENV !== 'production') {
 if (process.platform === 'darwin') {
   app.setAboutPanelOptions({
     applicationName: 'remix-app',
-    credits: 'Horizon Blockchain Games \n https://horizongames.co',
+    credits: 'Horizon Blockchain Games \n https://horizongames.net',
     copyright: 'Remix by https://github.com/ethereum/remix'
   })
 }
@@ -39,8 +39,8 @@ app.on('ready', () => {
   )
 
   // Work-around for electron/chrome 51+ onbeforeunload behavior
-  // which prevents the app window to close if not invlidated.
-  mainWindow.webContents.once('dom-ready', () => {
+  // which prevents the app window to close if not invalidated.
+  mainWindow.webContents.on('dom-ready', () => {
     mainWindow.webContents.executeJavaScript("window.onbeforeunload = null")
   })
 })

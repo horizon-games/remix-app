@@ -26,6 +26,12 @@ also caches solc compiler downloads so Remix is fully usable in airplane mode.
 * Remix IDE: https://github.com/ethereum/browser-solidity
 
 
+## Credits
+
+* Thanks to the amazing efforts by @yan300 + team for writing  https://github.com/ethereum/remix
+* Thanks to @acrylix for contributing
+
+
 ## LICENSE
 
 MIT

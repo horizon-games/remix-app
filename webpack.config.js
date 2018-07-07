@@ -1,20 +1,20 @@
-const path = require("path")
+const path = require('path')
 const webpack = require('webpack')
-const nodeExternals = require("webpack-node-externals")
+const nodeExternals = require('webpack-node-externals')
 
 module.exports = env => {
   return {
-    target: "node",
+    target: 'node',
     node: {
       __dirname: false,
       __filename: false
     },
     entry: {
-      main: "./src/main.js"
+      main: './src/main.js'
     },
     output: {
-      filename: "[name].js",
-      path: path.resolve(__dirname, "./build")
+      filename: '[name].js',
+      path: path.resolve(__dirname, './build')
     },
     externals: [ nodeExternals() ],
     resolve: {
@@ -26,13 +26,13 @@ module.exports = env => {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: ["babel-loader"]
+          use: ['babel-loader']
         }
       ]
     },
     plugins: [
       new webpack.DefinePlugin({
-        'NODE_ENV': JSON.stringify(env),
+        'NODE_ENV': JSON.stringify(env)
       })
     ]
   }
