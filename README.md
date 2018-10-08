@@ -14,9 +14,10 @@ also caches solc compiler downloads so Remix is fully usable in airplane mode.
 
 **To build your own:**
 1. Clone this repo
-2. `yarn install`
-3. `yarn dist`
-4. Find the distribution for your os in dist/
+2. `cd remix-app`
+3. `yarn install`
+4. `yarn dist`
+5. Find the distribution for your os in dist/
 
 
 ## Related links
