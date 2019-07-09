@@ -6,7 +6,7 @@ import { buildMenu } from './helpers/menu'
 import { registerAppCache } from './helpers/app_cache'
 
 // This line will just execute the listeners for the saving file process
-import './helpers/file-manager'
+// import './helpers/file-manager'
 
 let userDataPath = app.getPath('userData')
 if (NODE_ENV !== 'production') {

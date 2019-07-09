@@ -3,7 +3,34 @@ import { app, shell, BrowserWindow, BrowserView, dialog } from 'electron'
 const pkgJson = require('../../package.json')
 
 function buildMenu(mainWindow) {
-  let menu = [
+  let menu = []
+
+
+  if (process.platform === 'darwin') {
+    menu.push({
+      label: app.getName(),
+      submenu: [
+        { role: 'about' },
+        { type: 'separator' },
+        { role: 'services', submenu: [] },
+        { type: 'separator' },
+        { role: 'hide' },
+        { role: 'hideothers' },
+        { role: 'unhide' },
+        { type: 'separator' },
+        { role: 'quit' }
+      ]
+    })
+  } else {
+    menu.push({
+      label: 'File',
+      submenu: [
+        { role: 'quit' }
+      ]
+    })
+  }
+
+  menu.push(...[
     {
       label: 'Edit',
       submenu: [
@@ -111,24 +138,7 @@ function buildMenu(mainWindow) {
         }
       ]
     }
-  ]
-
-  if (process.platform === 'darwin') {
-    menu.unshift({
-      label: app.getName(),
-      submenu: [
-        { role: 'about' },
-        { type: 'separator' },
-        { role: 'services', submenu: [] },
-        { type: 'separator' },
-        { role: 'hide' },
-        { role: 'hideothers' },
-        { role: 'unhide' },
-        { type: 'separator' },
-        { role: 'quit' }
-      ]
-    })
-  }
+  ])
 
   return menu
 }
