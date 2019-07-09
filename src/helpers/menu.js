@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, BrowserView } from 'electron'
+import { app, shell, BrowserWindow, BrowserView, dialog } from 'electron'
 
 const pkgJson = require('../../package.json')
 
@@ -19,6 +19,29 @@ function buildMenu(mainWindow) {
     {
       role: 'window',
       submenu: [
+        { 
+          label: 'Reload',
+          accelerator: 'CmdOrCtrl+R',
+          click: () => {
+            const win = BrowserWindow.getFocusedWindow()
+            dialog.showMessageBox(
+              win,
+              {
+                type: 'warning',
+                buttons: ['Cancel', 'Ok'],
+                message: 'Do you want to reload the app?',
+                detail: 'Changes that you made may not be saved'
+              },
+              id => {
+                // 1 is the index of Ok button, which is the confirmation of reload
+                if(id === 1) {
+                  win.reload()
+                }
+              }
+            );
+          }
+        },
+        { role: 'forcereload' },
         { role: 'minimize' },
         {
           label: 'Close',
