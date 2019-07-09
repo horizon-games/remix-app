@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, BrowserView } from 'electron'
+import { app, shell, BrowserWindow, BrowserView, dialog } from 'electron'
 
 const pkgJson = require('../../package.json')
 
@@ -10,6 +10,31 @@ function buildMenu(mainWindow) {
         { role: 'undo' },
         { role: 'redo' },
         { type: 'separator' },
+        { 
+          label: 'Save as...',
+          accelerator: 'Shift+CmdOrCtrl+S',
+          click: () => {
+            const win = BrowserWindow.getFocusedWindow()
+            // The data of the file will be always in localStorage and
+            // we can get the title of the file by getting the active tab text
+            win.webContents.executeJavaScript(`
+              ((window) => {
+                try {
+                  const title = window.document.getElementsByClassName('active')[0].childNodes[4].title;
+                  if(title === "Home" || !title) {
+                    alert('No file opened')
+                  } else {
+                    require('electron').ipcRenderer.send('save-file', {title, content: window.localStorage.getItem('sol:' + title)})
+                  }
+                } catch(err){
+                  console.log(err)
+                  alert('No file opened')
+                }
+              })(window)
+            `);
+          }
+        },
+        { type: 'separator' },
         { role: 'cut' },
         { role: 'copy' },
         { role: 'paste' },
@@ -19,6 +44,29 @@ function buildMenu(mainWindow) {
     {
       role: 'window',
       submenu: [
+        { 
+          label: 'Reload',
+          accelerator: 'CmdOrCtrl+R',
+          click: () => {
+            const win = BrowserWindow.getFocusedWindow()
+            dialog.showMessageBox(
+              win,
+              {
+                type: 'warning',
+                buttons: ['Cancel', 'Ok'],
+                message: 'Do you want to reload the app?',
+                detail: 'Changes that you made may not be saved'
+              },
+              id => {
+                // 1 is the index of Ok button, which is the confirmation of reload
+                if(id === 1) {
+                  win.reload()
+                }
+              }
+            );
+          }
+        },
+        { role: 'forcereload' },
         { role: 'minimize' },
         {
           label: 'Close',

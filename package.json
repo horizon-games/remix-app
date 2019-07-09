@@ -25,6 +25,17 @@
       "target": [
         "tar.gz"
       ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
     }
   },
   "scripts": {
@@ -35,7 +46,8 @@
     "dist": "yarn build && electron-builder",
     "dist:all": "yarn dist -ml",
     "dist:mac": "yarn dist -m",
-    "dist:linux": "yarn dist -l"
+    "dist:linux": "yarn dist -l",
+    "dist:windows": "yarn dist -w"
   },
   "dependencies": {
     "electron-fetch": "^1.2.1",
