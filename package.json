@@ -3,7 +3,7 @@
   "version": "0.4.0",
   "description": "Remix Solidity IDE https://remix.ethereum.org - Electron Edition",
   "author": "Peter Kieltyka <pk@horizongames.net>",
-  "credits": "Horizon Blockchain Games https://horizongames.net",
+  "credits": "Sequence Platforms ULC https://horizongames.net",
   "copyright": "Remix by https://github.com/ethereum/remix",
   "license": "MIT",
   "homepage": "https://github.com/horizon-games/remix-app",
